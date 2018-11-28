@@ -1,13 +1,24 @@
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GameOfLifeShould {
 
-    @Test
-    public void not_change_single_dead_cell() {
-        GameOfLife game = new GameOfLife(new int[][] { {0} });
-        assertThat(game.nextGen(), is(new int[][] { {0} }));
+    @ParameterizedTest
+    @MethodSource("getParams")
+    public void not_change_single_dead_cell(int[][] input, int[][] expectedOutput) {
+        GameOfLife game = new GameOfLife(input);
+        assertThat(game.nextGen(), is(expectedOutput));
+    }
+
+    private static Stream<Arguments> getParams() {
+        return Stream.of(
+                Arguments.of(new int[][] { {0} }, new int[][] { {0} })
+        );
     }
 }
