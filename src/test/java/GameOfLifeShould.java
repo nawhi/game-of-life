@@ -11,14 +11,15 @@ public class GameOfLifeShould {
 
     @ParameterizedTest
     @MethodSource("getParams")
-    public void not_change_single_dead_cell(int[][] input, int[][] expectedOutput) {
+    public void not_change_empty_board(int[][] input, int[][] expectedOutput) {
         GameOfLife game = new GameOfLife(input);
         assertThat(game.nextGen(), is(expectedOutput));
     }
 
     private static Stream<Arguments> getParams() {
         return Stream.of(
-                Arguments.of(new int[][] { {0} }, new int[][] { {0} })
+                Arguments.of(new int[][] { {0} }, new int[][] { {0} }),
+                Arguments.of(new int[][] { {0,0}, {0,0} }, new int[][] { {0,0}, {0,0} })
         );
     }
 }
