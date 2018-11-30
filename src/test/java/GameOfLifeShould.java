@@ -1,4 +1,3 @@
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -9,17 +8,43 @@ public class GameOfLifeShould {
     private GameOfLife game;
 
     @Test
-    void not_change_dead_cell_no_neighbours() {
-        int[][] input = emptyBoard(3, 3);
-        game = new GameOfLife(input);
+    void not_change_dead_cell_with_no_neighbours() {
+        game = new GameOfLife(new int[][] {
+                {0, 0, 0},
+                {0, 0, 0},
+                {0, 0, 0}
+        });
 
         game.nextGen();
 
         assertThat(game.cell(1, 1), is(0));
     }
 
-    public int[][] emptyBoard(int numberOfRows, int numberOfColumns) {
-        return new int[numberOfRows][numberOfColumns];
+
+    @Test
+    void not_change_dead_cell_with_one_neighbour() {
+        game = new GameOfLife(new int[][] {
+            {0, 1, 0},
+            {0, 0, 0},
+            {0, 0, 0}
+        });
+
+        game.nextGen();
+
+        assertThat(game.cell(1, 1), is(0));
+    }
+
+    @Test
+    void not_change_dead_cell_with_two_neighbours() {
+        game = new GameOfLife(new int[][] {
+                {0, 1, 0},
+                {0, 0, 0},
+                {0, 1, 0}
+        });
+
+        game.nextGen();
+
+        assertThat(game.cell(1, 1), is(0));
     }
 
 }
