@@ -1,5 +1,15 @@
 public class GameOfLife {
-    public int[][] nextGen(int[][] cells) {
-        return new int[][] { {0} };
+
+
+    public GameOfLife(int[][] input) {
+
+    }
+
+    public void nextGen() {
+
+    }
+
+    public int cell(int row, int col) {
+        return 0;
     }
 }
