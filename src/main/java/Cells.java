@@ -1,30 +1,36 @@
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
 public class Cells {
     private final Cell[][] cells;
+    private final int numRows;
+    private final int numColumns;
 
     public Cells(int numColumns, int numRows) {
+        this.numColumns = numColumns;
+        this.numRows = numRows;
+
         cells = new Cell[numRows][numColumns];
-        for (int i = 0; i < numRows; i++) {
-            for (int j = 0; j < numColumns; j++) {
-                cells[i][j] = Cell.DEAD;
-            }
-        }
-    }
-
-    public Cell get(int column, int row) {
-        return cells[row][column];
-    }
-
-    public Cells set(int column, int row, Cell cell) {
-        cells[row][column] = cell;
-        return this;
+        killAll();
     }
 
     public Cells kill(int column, int row) {
         cells[row][column] = Cell.DEAD;
         return this;
     }
+
+    public void killAll() {
+        IntStream.range(0, numColumns).forEach(col -> {
+            IntStream.range(0, numRows).forEach(row -> {
+                kill(col, row);
+            });
+        });
+    }
+
+    public Cell get(int column, int row) {
+        return cells[row][column];
+    }
+
 
     public Cells bringToLife(int column, int row) {
         cells[row][column] = Cell.ALIVE;

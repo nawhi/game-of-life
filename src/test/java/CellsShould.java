@@ -19,10 +19,10 @@ public class CellsShould {
     @Test
     public void be_settable_to_alive() {
         Cells cells = new Cells(3, 3);
-        cells.bringToLife(1, 1);
+        cells.bringToLife(1, 2);
         IntStream.range(0, 3).forEach(col -> {
             IntStream.range(0, 3).forEach(row -> {
-                Cell cell = ((col == 1 && row == 1) ? Cell.ALIVE : Cell.DEAD);
+                Cell cell = ((col == 1 && row == 2) ? Cell.ALIVE : Cell.DEAD);
                 assertThat(cells.get(col, row), is(cell));
             });
         });
@@ -30,10 +30,10 @@ public class CellsShould {
 
     @Test
     public void be_settable_to_dead() {
-        Cells cells = new Cells(1, 1)
-                .bringToLife(0, 0)
-                .kill(0, 0);
-        assertThat(cells.get(0, 0), is(Cell.DEAD));
+        Cells cells = new Cells(2, 6)
+                .bringToLife(1, 4)
+                .kill(1, 4);
+        assertThat(cells.get(1, 4), is(Cell.DEAD));
 
     }
 }

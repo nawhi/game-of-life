@@ -6,7 +6,7 @@ public class Game {
     }
 
     public Cells nextGen() {
-        cells.kill(0, 0);
+        cells.killAll();
         return cells;
     }
 

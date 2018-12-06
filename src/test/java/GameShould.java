@@ -25,4 +25,13 @@ public class GameShould {
         Game game = new Game(ONE_ALIVE_CELL);
         assertEquals(ONE_DEAD_CELL, game.nextGen());
     }
+
+    @Test
+    public void kill_live_cell_with_one_neighbour() {
+        Cells twoLiveCells = new Cells(2, 3)
+                .bringToLife(0, 0)
+                .bringToLife(1, 0);
+        Cells allDeadCells = new Cells(2, 3);
+        assertEquals(allDeadCells, new Game(twoLiveCells).nextGen());
+    }
 }
