@@ -7,19 +7,18 @@ import java.util.stream.Stream;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class GameOfLifeShould {
+public class GameShould {
 
     @ParameterizedTest
     @MethodSource("getParams")
-    public void not_change_empty_board(int[][] input, int[][] expectedOutput) {
-        GameOfLife game = new GameOfLife(input);
+    public void not_change_empty_board(Cells input, Cells expectedOutput) {
+        Game game = new Game(input);
         assertThat(game.nextGen(), is(expectedOutput));
     }
 
     private static Stream<Arguments> getParams() {
         return Stream.of(
-                Arguments.of(new int[][] { {0} }, new int[][] { {0} }),
-                Arguments.of(new int[][] { {0,0}, {0,0} }, new int[][] { {0,0}, {0,0} })
+            // TODO
         );
     }
 }
