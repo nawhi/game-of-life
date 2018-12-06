@@ -6,7 +6,7 @@ public class Game {
     }
 
     public Cells nextGen() {
-        return null;
+        return cells;
     }
 
 }
