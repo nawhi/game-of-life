@@ -14,6 +14,13 @@ public class GameShould {
     }
 
     @Test
+    public void not_change_many_dead_cells() {
+        Cells deadCells = new Cells(3, 4);
+        Game game = new Game(deadCells);
+        assertEquals(deadCells, game.nextGen());
+    }
+
+    @Test
     public void kill_single_alive_cell() {
         Game game = new Game(ONE_ALIVE_CELL);
         assertEquals(ONE_DEAD_CELL, game.nextGen());
