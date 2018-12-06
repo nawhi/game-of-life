@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Cells {
     private final Cell[][] cells;
 
@@ -16,5 +18,23 @@ public class Cells {
 
     public void set(int column, int row, Cell cell) {
         cells[row][column] = cell;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cells cells1 = (Cells) o;
+        return Arrays.equals(cells, cells1.cells);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(cells);
+    }
+
+    @Override
+    public String toString() {
+        return Arrays.deepToString(cells);
     }
 }

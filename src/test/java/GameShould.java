@@ -1,24 +1,13 @@
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.api.Test;
 
-import java.util.stream.Stream;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GameShould {
 
-    @ParameterizedTest
-    @MethodSource("getParams")
-    public void not_change_empty_board(Cells input, Cells expectedOutput) {
+    @Test
+    public void not_change_empty_board() {
+        Cells input = new Cells(1, 1);
         Game game = new Game(input);
-        assertThat(game.nextGen(), is(expectedOutput));
-    }
-
-    private static Stream<Arguments> getParams() {
-        return Stream.of(
-            // TODO
-        );
+        assertEquals(input, game.nextGen());
     }
 }
