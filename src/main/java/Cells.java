@@ -1,7 +1,7 @@
 import java.util.Arrays;
 import java.util.stream.IntStream;
 
-public class Cells {
+public class Cells implements Cloneable {
     private final Cell[][] cells;
     private final int numRows;
     private final int numColumns;
@@ -31,10 +31,17 @@ public class Cells {
         return cells[row][column];
     }
 
-
     public Cells bringToLife(int column, int row) {
         cells[row][column] = Cell.ALIVE;
         return this;
+    }
+
+    @Override
+    public Cells clone() {
+        Cells clone = new Cells(numRows, numColumns);
+        // TODO
+        throw new UnsupportedOperationException("TODO");
+
     }
 
     @Override

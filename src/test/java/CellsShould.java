@@ -4,6 +4,7 @@ import java.util.stream.IntStream;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class CellsShould {
     @Test
@@ -34,6 +35,13 @@ public class CellsShould {
                 .bringToLife(1, 4)
                 .kill(1, 4);
         assertThat(cells.get(1, 4), is(Cell.DEAD));
+    }
 
+    @Test
+    public void produce_distinct_clones() {
+        Cells cells = new Cells(2, 2).bringToLife(1, 1);
+        Cells clone = cells.clone();
+        clone.kill(1, 1);
+        assertNotEquals(cells, clone);
     }
 }

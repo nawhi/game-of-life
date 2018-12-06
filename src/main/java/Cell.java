@@ -10,6 +10,6 @@ public class Cell {
 
     @Override
     public String toString() {
-        return (isAlive ? "A" : "D");
+        return (isAlive ? "L" : "D");
     }
 }
