@@ -16,8 +16,19 @@ public class Cells {
         return cells[row][column];
     }
 
-    public void set(int column, int row, Cell cell) {
+    public Cells set(int column, int row, Cell cell) {
         cells[row][column] = cell;
+        return this;
+    }
+
+    public Cells kill(int column, int row) {
+        cells[row][column] = Cell.DEAD;
+        return this;
+    }
+
+    public Cells bringToLife(int column, int row) {
+        cells[row][column] = Cell.ALIVE;
+        return this;
     }
 
     @Override
@@ -25,7 +36,7 @@ public class Cells {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cells cells1 = (Cells) o;
-        return Arrays.equals(cells, cells1.cells);
+        return Arrays.deepEquals(cells1.cells, cells);
     }
 
     @Override
