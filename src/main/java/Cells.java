@@ -6,41 +6,41 @@ public class Cells implements Cloneable {
     private final int numRows;
     private final int numColumns;
 
-    public Cells(int numColumns, int numRows) {
-        this.numColumns = numColumns;
+    public Cells(int numRows, int numColumns) {
         this.numRows = numRows;
+        this.numColumns = numColumns;
 
         cells = new Cell[numRows][numColumns];
         killAll();
     }
 
-    public Cells kill(int column, int row) {
+    public Cells kill(int row, int column) {
         cells[row][column] = Cell.DEAD;
         return this;
     }
 
     public void killAll() {
-        IntStream.range(0, numColumns).forEach(col -> {
-            IntStream.range(0, numRows).forEach(row -> {
-                kill(col, row);
+        IntStream.range(0, numRows).forEach(row -> {
+            IntStream.range(0, numColumns).forEach(col -> {
+                kill(row, col);
             });
         });
     }
 
-    public Cell get(int column, int row) {
-        return cells[row][column];
+    public Cell get(int row, int col) {
+        return cells[row][col];
     }
 
-    public Cells bringToLife(int column, int row) {
-        cells[row][column] = Cell.ALIVE;
+    public Cells bringToLife(int row, int col) {
+        cells[row][col] = Cell.ALIVE;
         return this;
     }
 
     @Override
     public Cells clone() {
-        Cells clone = new Cells(numColumns, numRows);
-        IntStream.range(0, numColumns).forEach(col -> {
-            clone.cells[col] = Arrays.copyOf(this.cells[col], this.numRows);
+        Cells clone = new Cells(numRows, numColumns);
+        IntStream.range(0, numColumns).forEach(row -> {
+            clone.cells[row] = Arrays.copyOf(this.cells[row], this.numColumns);
         });
         return clone;
     }
