@@ -38,10 +38,11 @@ public class Cells implements Cloneable {
 
     @Override
     public Cells clone() {
-        Cells clone = new Cells(numRows, numColumns);
-        // TODO
-        throw new UnsupportedOperationException("TODO");
-
+        Cells clone = new Cells(numColumns, numRows);
+        IntStream.range(0, numColumns).forEach(col -> {
+            clone.cells[col] = Arrays.copyOf(this.cells[col], this.numRows);
+        });
+        return clone;
     }
 
     @Override
