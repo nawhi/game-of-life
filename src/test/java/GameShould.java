@@ -52,6 +52,22 @@ public class GameShould {
                 .bringToLife(2, 1);
 
         Cells actualCells = new Game(cells).nextGen();
-        assertEquals(actualCells, cells);
+        assertEquals(cells, actualCells);
+    }
+
+    @Test
+    public void keep_alive_cells_with_three_neighbours() {
+        /*
+        D L L D
+        D L L D
+        */
+        Cells cells = new Cells(4, 2)
+                .bringToLife(1, 0)
+                .bringToLife(1, 1)
+                .bringToLife(2, 0)
+                .bringToLife(2, 1);
+
+        Cells actualCells = new Game(cells).nextGen();
+        assertEquals(cells, actualCells);
     }
 }
