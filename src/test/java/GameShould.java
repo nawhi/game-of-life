@@ -52,7 +52,6 @@ public class GameShould {
                 .bringToLife(2, 1);
 
         Cells actualCells = new Game(cells).nextGen();
-        System.out.println("asserting that " +actualCells + "equals" + cells);
         assertEquals(actualCells, cells);
     }
 }
