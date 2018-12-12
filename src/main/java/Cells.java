@@ -9,13 +9,33 @@ public class Cells implements Cloneable {
     public Cells(int numRows, int numColumns) {
         this.numRows = numRows;
         this.numColumns = numColumns;
+        cells = initialiseCells(numRows, numColumns);
+    }
 
-        cells = new Cell[numRows][numColumns];
-        killAll();
+    public Cells(Cells other) {
+        this.numRows = other.numRows;
+        this.numColumns = other.numColumns;
+        this.cells = new Cell[numRows][numColumns];
+
+        IntStream.range(0, numRows).forEach(row -> {
+            IntStream.range(0, numColumns).forEach(column -> {
+                cells[row][column] = new Cell(other.cells[row][column]);
+            });
+        });
+    }
+
+    private Cell[][] initialiseCells(int numRows, int numColumns) {
+        Cell[][] cells = new Cell[numRows][numColumns];
+        IntStream.range(0, numRows).forEach(row -> {
+            IntStream.range(0, numColumns).forEach(column -> {
+                cells[row][column] = new Cell(false);
+            });
+        });
+        return cells;
     }
 
     public Cells kill(int row, int column) {
-        cells[row][column] = Cell.DEAD;
+        cells[row][column].kill();
         return this;
     }
 
@@ -32,7 +52,7 @@ public class Cells implements Cloneable {
     }
 
     public Cells bringToLife(int row, int col) {
-        cells[row][col] = Cell.ALIVE;
+        cells[row][col].bringToLife();
         return this;
     }
 

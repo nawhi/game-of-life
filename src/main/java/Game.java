@@ -8,9 +8,7 @@ public class Game {
     }
 
     public Cells nextGen() {
-        System.out.println("before, cells=" + cells);
         cells.killAll();
-        System.out.println("after, cells=" + cells);
         return cells;
 
     }
