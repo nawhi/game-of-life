@@ -1,7 +1,9 @@
+import java.util.List;
 import java.util.Objects;
 
 public class Cell {
     private boolean isAlive;
+    private List<Cell> neighbours;
 
     Cell(boolean isAlive) {
         this.isAlive = isAlive;
@@ -9,6 +11,11 @@ public class Cell {
 
     Cell(Cell other) {
         this.isAlive = other.isAlive;
+    }
+
+    public Cell(boolean isAlive, List<Cell> neighbours) {
+        this.isAlive = isAlive;
+        this.neighbours = neighbours;
     }
 
     void kill() {
@@ -39,5 +46,9 @@ public class Cell {
     @Override
     public int hashCode() {
         return Objects.hash(isAlive);
+    }
+
+    public Cell getNeighbour(int row, int col) {
+        return null;
     }
 }
