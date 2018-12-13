@@ -6,6 +6,13 @@ public class GameCell implements Cell {
     private boolean isAlive;
     private List<Cell> neighbours;
 
+    private enum NextGenState {
+        LIVE,
+        DIE
+    }
+
+    private NextGenState nextGenState = NextGenState.DIE;
+
     GameCell(boolean isAlive) {
         this.isAlive = isAlive;
     }
@@ -61,12 +68,22 @@ public class GameCell implements Cell {
 
     @Override
     public void mark() {
+        int count = 0;
+        for (var neighbour: neighbours) {
+            if (neighbour.isAlive()) {
+                ++count;
+            }
+        }
+        if (count > 1)
+            nextGenState = NextGenState.LIVE;
+        else
+            nextGenState = NextGenState.DIE;
 
     }
 
     @Override
     public void evolve() {
-        kill();
+        isAlive = (nextGenState == NextGenState.LIVE);
     }
 
     public void setNeighbours(List<Cell> neighbours) {
