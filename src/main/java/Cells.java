@@ -8,26 +8,31 @@ public class Cells {
     private final int numRows;
     private final int numColumns;
 
-    Cells(int numRows, int numColumns) {
+    private Cells(int numRows, int numColumns) {
         this.numRows = numRows;
         this.numColumns = numColumns;
         cells = new GameCell[numRows][numColumns];
         forEachCell((row, col) -> cells[row][col] = new GameCell(false));
+    }
 
-        forEachCell((row, col) -> {
+    static Cells create(int numRows, int numColumns) {
+        Cells object = new Cells(numRows, numColumns);
+
+        object.forEachCell((row, col) -> {
             List<Cell> neighbours = new ArrayList<>();
-            neighbours.add(getCellOrBorder(row-1, col-1));
-            neighbours.add(getCellOrBorder(row-1, col  ));
-            neighbours.add(getCellOrBorder(row-1, col+1));
-            neighbours.add(getCellOrBorder(row,   col+1));
-            neighbours.add(getCellOrBorder(row+1, col+1));
-            neighbours.add(getCellOrBorder(row+1, col  ));
-            neighbours.add(getCellOrBorder(row+1, col-1));
-            neighbours.add(getCellOrBorder(row+1, col-1));
+            neighbours.add(object.getCellOrBorder(row-1, col-1));
+            neighbours.add(object.getCellOrBorder(row-1, col  ));
+            neighbours.add(object.getCellOrBorder(row-1, col+1));
+            neighbours.add(object.getCellOrBorder(row,   col+1));
+            neighbours.add(object.getCellOrBorder(row+1, col+1));
+            neighbours.add(object.getCellOrBorder(row+1, col  ));
+            neighbours.add(object.getCellOrBorder(row+1, col-1));
+            neighbours.add(object.getCellOrBorder(row+1, col-1));
 
-            cells[row][col].setNeighbours(neighbours);
+            object.cells[row][col].setNeighbours(neighbours);
         });
     }
+
 
     private Cell getCellOrBorder(Integer row, Integer col) {
         boolean outOfBounds = row < 0

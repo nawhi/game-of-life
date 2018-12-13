@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GameShould {
 
-    private final Cells ONE_DEAD_CELL = new Cells(1, 1);
-    private final Cells ONE_ALIVE_CELL = new Cells(1, 1).bringToLife(0, 0);
+    private final Cells ONE_DEAD_CELL = Cells.create(1, 1);
+    private final Cells ONE_ALIVE_CELL = Cells.create(1, 1).bringToLife(0, 0);
 
     @Test
     public void not_change_single_dead_cell() {
@@ -16,7 +16,7 @@ public class GameShould {
 
     @Test
     public void not_change_many_dead_cells() {
-        Cells deadCells = new Cells(3, 4);
+        Cells deadCells = Cells.create(3, 4);
         Game game = new Game(deadCells);
         assertEquals(deadCells, game.nextGen());
     }
@@ -34,10 +34,10 @@ public class GameShould {
         D D
         D D
          */
-        Cells twoLiveCells = new Cells(2, 3)
+        Cells twoLiveCells = Cells.create(2, 3)
                 .bringToLife(0, 0)
                 .bringToLife(1, 0);
-        Cells allDeadCells = new Cells(2, 3);
+        Cells allDeadCells = Cells.create(2, 3);
         assertEquals(allDeadCells, new Game(twoLiveCells).nextGen());
     }
 
@@ -48,7 +48,7 @@ public class GameShould {
         D L D D
         D L L D
         */
-        Cells cells = new Cells(4, 2)
+        Cells cells = Cells.create(4, 2)
                 .bringToLife(1, 0)
                 .bringToLife(1, 1)
                 .bringToLife(2, 1);
@@ -64,7 +64,7 @@ public class GameShould {
         D L L D
         D L L D
         */
-        Cells cells = new Cells(4, 2)
+        Cells cells = Cells.create(4, 2)
                 .bringToLife(1, 0)
                 .bringToLife(1, 1)
                 .bringToLife(2, 0)

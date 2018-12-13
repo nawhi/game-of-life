@@ -25,7 +25,7 @@ public class CellsShould {
 
     @Test
     public void initialise_to_dead() {
-        Cells cells = new Cells(5, 5);
+        Cells cells = Cells.create(5, 5);
         IntStream.range(0, 5).forEach(col -> {
             IntStream.range(0, 5).forEach(row -> {
                 assertThat(cells.get(col, row).isAlive(), is(false));
@@ -35,7 +35,7 @@ public class CellsShould {
 
     @Test
     public void be_settable_to_alive() {
-        Cells cells = new Cells(3, 3);
+        Cells cells = Cells.create(3, 3);
         cells.bringToLife(1, 2);
         IntStream.range(0, 3).forEach(col -> {
             IntStream.range(0, 3).forEach(row -> {
@@ -46,7 +46,7 @@ public class CellsShould {
 
     @Test
     public void be_settable_to_dead() {
-        Cells cells = new Cells(2, 6)
+        Cells cells = Cells.create(2, 6)
                 .bringToLife(1, 4)
                 .kill(1, 4);
         assertThat(cells.get(1, 4).isAlive(), is(false));
@@ -54,7 +54,7 @@ public class CellsShould {
 
     @Test
     public void produce_distinct_copies() {
-        Cells cells1 = new Cells(2, 3).bringToLife(1, 2);
+        Cells cells1 = Cells.create(2, 3).bringToLife(1, 2);
         Cells cells2 = new Cells(cells1);
 
         cells2.kill(1, 2);
@@ -66,7 +66,7 @@ public class CellsShould {
 
     @Test
     public void link_single_cell_to_border_cells() {
-        Cells cells = new Cells(1, 1);
+        Cells cells = Cells.create(1, 1);
         Cell cell = cells.get(0, 0);
         for (var coord: NEIGHBOUR_COORDS) {
             Cell neighbour = cell.getNeighbour(coord.getLeft(), coord.getRight());
@@ -76,7 +76,7 @@ public class CellsShould {
 
     @Test
     public void link_larger_cell_board() {
-        Cells cells = new Cells(2, 3);
+        Cells cells = Cells.create(2, 3);
         cells.bringAllToLife();
 
         /*
