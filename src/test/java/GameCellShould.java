@@ -5,6 +5,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class GameCellShould {
@@ -37,4 +38,16 @@ public class GameCellShould {
         assertTrue(neighbour.isAlive());
     }
 
+    @Test
+    public void die_if_no_live_neighbours() {
+        List<Cell> neighbours = new ArrayList<>();
+        for (int i = 0; i < 8; i++) {
+            neighbours.add(new BorderCell());
+        }
+        neighbours.set(0, new GameCell(false));
+        GameCell cell = new GameCell(true, neighbours);
+        cell.mark();
+        cell.evolve();
+        assertFalse(cell.isAlive());
+    }
 }
