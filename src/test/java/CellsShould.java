@@ -1,9 +1,13 @@
+import org.apache.commons.lang3.tuple.Pair;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.stream.IntStream;
 
+import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CellsShould {
     @Test
@@ -44,5 +48,31 @@ public class CellsShould {
 
         assertThat(cells1.get(1, 2).isAlive(), is(true));
         assertThat(cells2.get(1, 2).isAlive(), is(false));
+    }
+
+    public static final List<Pair<Integer, Integer>> COORDS = asList(
+            Pair.of(-1, -1),
+            Pair.of(-1, 0),
+            Pair.of(-1, 1),
+            Pair.of(0, 1),
+            Pair.of(1, 1),
+            Pair.of(1, 0),
+            Pair.of(1, -1),
+            Pair.of(0, -1)
+    );
+
+    @Test
+    public void link_single_cell_to_border_cells() {
+        Cells cells = new Cells(1, 1);
+        Cell cell = cells.get(0, 0);
+        for (var coord: COORDS) {
+            Cell neighbour = cell.getNeighbour(coord.getLeft(), coord.getRight());
+            assertTrue(isBorderCell(neighbour));
+        }
+    }
+
+    private boolean isBorderCell(Cell neighbour) {
+        neighbour.bringToLife();
+        return !neighbour.isAlive();
     }
 }

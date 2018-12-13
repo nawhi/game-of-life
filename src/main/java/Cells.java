@@ -12,10 +12,31 @@ public class Cells {
         this.numRows = numRows;
         this.numColumns = numColumns;
         cells = new GameCell[numRows][numColumns];
+        forEachCell((row, col) -> cells[row][col] = new GameCell(false));
+
         forEachCell((row, col) -> {
             List<Cell> neighbours = new ArrayList<>();
-            cells[row][col] = new GameCell(false, neighbours);
+            neighbours.add(getCellOrBorder(row-1, col-1));
+            neighbours.add(getCellOrBorder(row-1, col  ));
+            neighbours.add(getCellOrBorder(row-1, col+1));
+            neighbours.add(getCellOrBorder(row,   col+1));
+            neighbours.add(getCellOrBorder(row+1, col+1));
+            neighbours.add(getCellOrBorder(row+1, col  ));
+            neighbours.add(getCellOrBorder(row+1, col-1));
+            neighbours.add(getCellOrBorder(row+1, col-1));
+
+            cells[row][col].setNeighbours(neighbours);
         });
+    }
+
+    private Cell getCellOrBorder(Integer row, Integer col) {
+        boolean outOfBounds = row < 0
+                || row >= numRows
+                || col < 0
+                || col >= numColumns;
+        if (outOfBounds)
+            return new BorderCell();
+        return cells[row][col];
     }
 
     Cells(Cells other) {

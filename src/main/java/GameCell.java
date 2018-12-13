@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -56,5 +57,9 @@ public class GameCell implements Cell {
         int position = row + col + 2;
         int index = (row > col) ? (8 - position) : position;
         return neighbours.get(index);
+    }
+
+    public void setNeighbours(List<Cell> neighbours) {
+        this.neighbours = new ArrayList<>(neighbours);
     }
 }
