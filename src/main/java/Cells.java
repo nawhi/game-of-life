@@ -60,6 +60,10 @@ public class Cells {
         forEachCell(this::kill);
     }
 
+    void bringAllToLife() {
+        forEachCell(this::bringToLife);
+    }
+
     Cells kill(int row, int column) {
         cells[row][column].kill();
         return this;

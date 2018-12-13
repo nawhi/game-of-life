@@ -7,9 +7,22 @@ import java.util.stream.IntStream;
 import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CellsShould {
+
+    public static final List<Pair<Integer, Integer>> NEIGHBOUR_COORDS = asList(
+            Pair.of(-1, -1),
+            Pair.of(-1, 0),
+            Pair.of(-1, 1),
+            Pair.of(0, 1),
+            Pair.of(1, 1),
+            Pair.of(1, 0),
+            Pair.of(1, -1),
+            Pair.of(0, -1)
+    );
+
     @Test
     public void initialise_to_dead() {
         Cells cells = new Cells(5, 5);
@@ -50,24 +63,38 @@ public class CellsShould {
         assertThat(cells2.get(1, 2).isAlive(), is(false));
     }
 
-    public static final List<Pair<Integer, Integer>> COORDS = asList(
-            Pair.of(-1, -1),
-            Pair.of(-1, 0),
-            Pair.of(-1, 1),
-            Pair.of(0, 1),
-            Pair.of(1, 1),
-            Pair.of(1, 0),
-            Pair.of(1, -1),
-            Pair.of(0, -1)
-    );
 
     @Test
     public void link_single_cell_to_border_cells() {
         Cells cells = new Cells(1, 1);
         Cell cell = cells.get(0, 0);
-        for (var coord: COORDS) {
+        for (var coord: NEIGHBOUR_COORDS) {
             Cell neighbour = cell.getNeighbour(coord.getLeft(), coord.getRight());
             assertTrue(isBorderCell(neighbour));
+        }
+    }
+
+    @Test
+    public void link_larger_cell_board() {
+        Cells cells = new Cells(2, 3);
+        cells.bringAllToLife();
+
+        /*
+        B B B B B
+        B L L L B
+        B L L L B
+        B B B B B
+         */
+
+        var cell = cells.get(0, 0);
+        {
+            assertFalse(cell.getNeighbour(-1,-1).isAlive());
+            assertFalse(cell.getNeighbour(-1, 0).isAlive());
+            assertFalse(cell.getNeighbour( 0,-1).isAlive());
+
+            assertTrue(cell.getNeighbour(0, 1).isAlive());
+            assertTrue(cell.getNeighbour(1, 1).isAlive());
+            assertTrue(cell.getNeighbour(1, 0).isAlive());
         }
     }
 
