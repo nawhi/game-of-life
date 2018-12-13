@@ -71,4 +71,15 @@ public class GameCellShould {
         cell.evolve();
         assertTrue(cell.isAlive());
     }
+
+    @Test
+    public void stay_alive_if_three_live_neighbours() {
+        neighbours.set(0, new GameCell(true));
+        neighbours.set(1, new GameCell(true));
+        neighbours.set(2, new GameCell(true));
+        GameCell cell = new GameCell(true, neighbours);
+        cell.mark();
+        cell.evolve();
+        assertTrue(cell.isAlive());
+    }
 }
