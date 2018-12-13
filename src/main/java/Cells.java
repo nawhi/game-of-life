@@ -1,25 +1,30 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.BiConsumer;
 
 public class Cells {
-    private final Cell[][] cells;
+    private final GameCell[][] cells;
     private final int numRows;
     private final int numColumns;
 
     Cells(int numRows, int numColumns) {
         this.numRows = numRows;
         this.numColumns = numColumns;
-        cells = new Cell[numRows][numColumns];
-        forEachCell((row, col) -> cells[row][col] = new Cell(false));
+        cells = new GameCell[numRows][numColumns];
+        forEachCell((row, col) -> {
+            List<Cell> neighbours = new ArrayList<>();
+            cells[row][col] = new GameCell(false, neighbours);
+        });
     }
 
     Cells(Cells other) {
         this.numRows = other.numRows;
         this.numColumns = other.numColumns;
-        this.cells = new Cell[numRows][numColumns];
+        this.cells = new GameCell[numRows][numColumns];
 
         forEachCell((row, col) ->
-                cells[row][col] = new Cell(other.cells[row][col]));
+                cells[row][col] = new GameCell(other.cells[row][col]));
     }
 
     private void forEachCell(BiConsumer<Integer, Integer> action) {

@@ -7,15 +7,15 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class CellShould {
+public class GameCellShould {
 
     @Test
     public void have_neighbours() {
         List<Cell> neighbours = new ArrayList<>();
         for (int i = 0; i < 8; i++) {
-            neighbours.add(new Cell(false));
+            neighbours.add(new GameCell(false));
         }
-        Cell cell = new Cell(false, neighbours);
+        Cell cell = new GameCell(false, neighbours);
     }
 
     @ParameterizedTest
@@ -37,11 +37,11 @@ public class CellShould {
 
         List<Cell> neighbours = new ArrayList<>();
         for (int i = 0; i < 8; i++) {
-            neighbours.add(new Cell(false));
+            neighbours.add(new GameCell(false));
         }
         neighbours.get(listIndex).bringToLife();
 
-        Cell cell = new Cell(false, neighbours);
+        Cell cell = new GameCell(false, neighbours);
         Cell neighbour = cell.getNeighbour(row, col);
         assertTrue(neighbour.isAlive());
     }
