@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -9,6 +10,16 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class GameCellShould {
+
+    private List<Cell> neighbours;
+
+    @BeforeEach
+    void setUp() {
+        neighbours = new ArrayList<>();
+        for (int i = 0; i < 8; i++) {
+            neighbours.add(new GameCell(false));
+        }
+    }
 
     @ParameterizedTest
     @CsvSource({
@@ -27,10 +38,6 @@ public class GameCellShould {
         int row = Integer.parseInt(coordsArray[0]);
         int col = Integer.parseInt(coordsArray[1]);
 
-        List<Cell> neighbours = new ArrayList<>();
-        for (int i = 0; i < 8; i++) {
-            neighbours.add(new GameCell(false));
-        }
         neighbours.get(listIndex).bringToLife();
 
         Cell cell = new GameCell(false, neighbours);
@@ -40,11 +47,6 @@ public class GameCellShould {
 
     @Test
     public void die_if_no_live_neighbours() {
-        List<Cell> neighbours = new ArrayList<>();
-        for (int i = 0; i < 8; i++) {
-            neighbours.add(new BorderCell());
-        }
-        neighbours.set(0, new GameCell(false));
         GameCell cell = new GameCell(true, neighbours);
         cell.mark();
         cell.evolve();
