@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -40,6 +41,7 @@ public class GameShould {
         assertEquals(allDeadCells, new Game(twoLiveCells).nextGen());
     }
 
+    @Disabled
     @Test
     public void keep_alive_cells_with_two_neighbours() {
         /*
@@ -55,6 +57,7 @@ public class GameShould {
         assertEquals(cells, actualCells);
     }
 
+    @Disabled
     @Test
     public void keep_alive_cells_with_three_neighbours() {
         /*
