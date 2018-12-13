@@ -61,7 +61,8 @@ public class GameCellShould {
 
     @Test
     public void stay_alive_if_two_live_neighbours() {
-        range(0, 1).forEach(i -> neighbours.get(i).bringToLife());
+        neighbours.get(0).bringToLife();
+        neighbours.get(1).bringToLife();
         GameCell cell = liveCellWith(neighbours);
         assertTrue(cell.isAlive());
     }
@@ -80,8 +81,22 @@ public class GameCellShould {
         assertFalse(cell.isAlive());
     }
 
+    @Test
+    public void become_alive_if_exactly_three_live_neighbours() {
+        range(0, 4).forEach(i -> neighbours.get(i).bringToLife());
+        GameCell cell = deadCellWith(neighbours);
+        assertFalse(cell.isAlive());
+    }
+
     private static GameCell liveCellWith(List<Cell> neighbours) {
         GameCell cell = new GameCell(true, neighbours);
+        cell.mark();
+        cell.evolve();
+        return cell;
+    }
+
+    private static GameCell deadCellWith(List<Cell> neighbours) {
+        GameCell cell = new GameCell(false, neighbours);
         cell.mark();
         cell.evolve();
         return cell;

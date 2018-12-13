@@ -78,7 +78,6 @@ public class GameCell implements Cell {
             nextGenState = NextGenState.LIVE;
         else
             nextGenState = NextGenState.DIE;
-
     }
 
     @Override
