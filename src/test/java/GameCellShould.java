@@ -83,9 +83,9 @@ public class GameCellShould {
 
     @Test
     public void become_alive_if_exactly_three_live_neighbours() {
-        range(0, 4).forEach(i -> neighbours.get(i).bringToLife());
+        range(0, 3).forEach(i -> neighbours.get(i).bringToLife());
         GameCell cell = deadCellWith(neighbours);
-        assertFalse(cell.isAlive());
+        assertTrue(cell.isAlive());
     }
 
     private static GameCell liveCellWith(List<Cell> neighbours) {
