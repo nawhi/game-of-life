@@ -5,7 +5,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
 import static java.util.stream.IntStream.range;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -49,45 +48,42 @@ public class GameCellShould {
 
     @Test
     public void die_if_no_live_neighbours() {
-        GameCell cell = new GameCell(true, neighbours);
-        cell.mark();
-        cell.evolve();
+        GameCell cell = liveCellWith(neighbours);
         assertFalse(cell.isAlive());
     }
 
     @Test
     public void die_if_one_live_neighbour() {
         neighbours.get(0).bringToLife();
-        GameCell cell = new GameCell(true, neighbours);
-        cell.mark();
-        cell.evolve();
+        GameCell cell = liveCellWith(neighbours);
         assertFalse(cell.isAlive());
     }
 
     @Test
     public void stay_alive_if_two_live_neighbours() {
         range(0, 1).forEach(i -> neighbours.get(i).bringToLife());
-        GameCell cell = new GameCell(true, neighbours);
-        cell.mark();
-        cell.evolve();
+        GameCell cell = liveCellWith(neighbours);
         assertTrue(cell.isAlive());
     }
 
     @Test
     public void stay_alive_if_three_live_neighbours() {
         range(0, 3).forEach(i -> neighbours.get(i).bringToLife());
-        GameCell cell = new GameCell(true, neighbours);
-        cell.mark();
-        cell.evolve();
+        GameCell cell = liveCellWith(neighbours);
         assertTrue(cell.isAlive());
     }
 
     @Test
     public void die_if_more_than_three_live_neighbours() {
         range(0, 4).forEach(i -> neighbours.get(i).bringToLife());
+        GameCell cell = liveCellWith(neighbours);
+        assertFalse(cell.isAlive());
+    }
+
+    private static GameCell liveCellWith(List<Cell> neighbours) {
         GameCell cell = new GameCell(true, neighbours);
         cell.mark();
         cell.evolve();
-        assertFalse(cell.isAlive());
+        return cell;
     }
 }
