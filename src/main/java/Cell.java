@@ -49,6 +49,8 @@ public class Cell {
     }
 
     public Cell getNeighbour(int row, int col) {
+        if (row > col)
+            return neighbours.get(8 - (row+col+2));
         return neighbours.get(row + col + 2);
     }
 }
