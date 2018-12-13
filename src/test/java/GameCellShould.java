@@ -9,15 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class GameCellShould {
 
-    @Test
-    public void have_neighbours() {
-        List<Cell> neighbours = new ArrayList<>();
-        for (int i = 0; i < 8; i++) {
-            neighbours.add(new GameCell(false));
-        }
-        Cell cell = new GameCell(false, neighbours);
-    }
-
     @ParameterizedTest
     @CsvSource({
             "0,-1:-1",
@@ -45,4 +36,5 @@ public class GameCellShould {
         Cell neighbour = cell.getNeighbour(row, col);
         assertTrue(neighbour.isAlive());
     }
+
 }
