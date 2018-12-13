@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
+import static java.util.stream.IntStream.range;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -65,8 +66,7 @@ public class GameCellShould {
 
     @Test
     public void stay_alive_if_two_live_neighbours() {
-        neighbours.get(0).bringToLife();
-        neighbours.get(1).bringToLife();
+        range(0, 1).forEach(i -> neighbours.get(i).bringToLife());
         GameCell cell = new GameCell(true, neighbours);
         cell.mark();
         cell.evolve();
@@ -75,7 +75,7 @@ public class GameCellShould {
 
     @Test
     public void stay_alive_if_three_live_neighbours() {
-        IntStream.range(0, 3).forEach(i -> neighbours.get(i).bringToLife());
+        range(0, 3).forEach(i -> neighbours.get(i).bringToLife());
         GameCell cell = new GameCell(true, neighbours);
         cell.mark();
         cell.evolve();
@@ -84,7 +84,7 @@ public class GameCellShould {
 
     @Test
     public void die_if_more_than_three_live_neighbours() {
-        IntStream.range(0, 4).forEach(i -> neighbours.get(i).bringToLife());
+        range(0, 4).forEach(i -> neighbours.get(i).bringToLife());
         GameCell cell = new GameCell(true, neighbours);
         cell.mark();
         cell.evolve();
