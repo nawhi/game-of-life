@@ -115,4 +115,9 @@ public class Cells {
     public String toString() {
         return Arrays.deepToString(cells);
     }
+
+    public void nextGen() {
+        forEachCell((row, col) -> cells[row][col].mark());
+        forEachCell((row, col) -> cells[row][col].evolve());
+    }
 }

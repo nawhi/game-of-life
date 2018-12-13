@@ -18,4 +18,14 @@ public class BorderCell implements Cell {
     public Cell getNeighbour(int row, int col) {
         return null;
     }
+
+    @Override
+    public void mark() {
+
+    }
+
+    @Override
+    public void evolve() {
+
+    }
 }

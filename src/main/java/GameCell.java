@@ -59,6 +59,16 @@ public class GameCell implements Cell {
         return neighbours.get(index);
     }
 
+    @Override
+    public void mark() {
+
+    }
+
+    @Override
+    public void evolve() {
+        kill();
+    }
+
     public void setNeighbours(List<Cell> neighbours) {
         this.neighbours = new ArrayList<>(neighbours);
     }

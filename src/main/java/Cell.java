@@ -6,4 +6,8 @@ public interface Cell {
     boolean isAlive();
 
     Cell getNeighbour(int row, int col);
+
+    void mark();
+
+    void evolve();
 }
