@@ -21,18 +21,15 @@ public class CellShould {
     @ParameterizedTest
     @CsvSource({
             "0,-1:-1",
+            "1,-1:0",
+            "2,-1:1",
+            "3,0:1",
+            "4,1:1",
+//            "5,1:0",
+//            "6,1:-1",
+//            "7,0:-1"
     })
     public void assign_neighbours_from_a_list(int listIndex, String coordinates) {
-        /*
-        list[0] = (-1,-1)
-        list[1] = (-1, 0)
-        list[2] = (-1, 1)
-        list[3] =  (0, 1)
-        list[4] =  (1, 1)
-        list[5] =  (1, 0)
-        list[6] =  (1,-1)
-        list[7] =  (0,-1)
-         */
 
         String[] coordsArray = coordinates.split(":");
         int row = Integer.parseInt(coordsArray[0]);
