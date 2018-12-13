@@ -1,12 +1,27 @@
+import org.apache.commons.lang3.tuple.Pair;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiConsumer;
 
+import static java.util.Arrays.asList;
+
 public class Cells {
     private final GameCell[][] cells;
     private final int numRows;
     private final int numColumns;
+
+    private static final List<Pair<Integer, Integer>> NEIGHBOUR_COORDS = asList(
+            Pair.of(-1, -1),
+            Pair.of(-1, 0),
+            Pair.of(-1, 1),
+            Pair.of(0, 1),
+            Pair.of(1, 1),
+            Pair.of(1, 0),
+            Pair.of(1, -1),
+            Pair.of(0, -1)
+    );
 
     private Cells(int numRows, int numColumns) {
         this.numRows = numRows;
@@ -16,22 +31,21 @@ public class Cells {
     }
 
     static Cells create(int numRows, int numColumns) {
-        Cells object = new Cells(numRows, numColumns);
+        Cells cells = new Cells(numRows, numColumns);
+        cells.initialiseNeighbours();
+        return cells;
+    }
 
-        object.forEachCell((row, col) -> {
+    private void initialiseNeighbours() {
+        forEachCell((row, col) -> {
             List<Cell> neighbours = new ArrayList<>();
-            neighbours.add(object.getCellOrBorder(row-1, col-1));
-            neighbours.add(object.getCellOrBorder(row-1, col  ));
-            neighbours.add(object.getCellOrBorder(row-1, col+1));
-            neighbours.add(object.getCellOrBorder(row,   col+1));
-            neighbours.add(object.getCellOrBorder(row+1, col+1));
-            neighbours.add(object.getCellOrBorder(row+1, col  ));
-            neighbours.add(object.getCellOrBorder(row+1, col-1));
-            neighbours.add(object.getCellOrBorder(row+1, col-1));
-
-            object.cells[row][col].setNeighbours(neighbours);
+            for (var adjustment: NEIGHBOUR_COORDS) {
+                int neighbourRow = row + adjustment.getLeft();
+                int neighbourCol = col + adjustment.getRight();
+                neighbours.add(getCellOrBorder(neighbourRow, neighbourCol));
+            }
+            this.cells[row][col].setNeighbours(neighbours);
         });
-        return object;
     }
 
 
