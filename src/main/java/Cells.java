@@ -31,6 +31,7 @@ public class Cells {
 
             object.cells[row][col].setNeighbours(neighbours);
         });
+        return object;
     }
 
 
