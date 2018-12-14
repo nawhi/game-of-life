@@ -1,4 +1,6 @@
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static junit.framework.TestCase.assertSame;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -12,7 +14,17 @@ public class GameShould {
         assertFalse(cell.isAlive());
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource({
+            "-1,-1",
+            "-1,0",
+            "-1,1",
+            "0,1",
+            "1,1",
+            "1,0",
+            "1,-1",
+            "0,-1"
+    })
     public void give_all_BorderCell_neighbours_to_single_cell() {
         Cell cell = new Game(1, 1).cellAt(0, 0);
         Cell neighbour = cell.getNeighbour(-1, -1);
