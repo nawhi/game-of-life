@@ -79,13 +79,9 @@ public class GameCell implements Cell {
     }
 
     private int getNumLiveNeighbours() {
-        int count = 0;
-        for (var neighbour: neighbours) {
-            if (neighbour.isAlive()) {
-                ++count;
-            }
-        }
-        return count;
+        return (int) neighbours.stream()
+                .filter(n -> n.isAlive())
+                .count();
     }
 
     @Override
