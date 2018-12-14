@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class BorderCell implements Cell {
     @Override
     public void kill() {
@@ -15,7 +17,7 @@ public class BorderCell implements Cell {
     }
 
     @Override
-    public Cell getNeighbour(int row, int col) {
+    public Cell getNeighbour(int relativeRow, int relativeCol) {
         return null;
     }
 
@@ -26,6 +28,11 @@ public class BorderCell implements Cell {
 
     @Override
     public void evolve() {
+
+    }
+
+    @Override
+    public void setNeighbours(List<Cell> neighbours) {
 
     }
 }

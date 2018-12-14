@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -54,9 +55,9 @@ public class GameCell implements Cell {
     }
 
     @Override
-    public Cell getNeighbour(int row, int col) {
-        int position = row + col + 2;
-        int index = (row > col) ? (8 - position) : position;
+    public Cell getNeighbour(int relativeRow, int relativeCol) {
+        int position = relativeRow + relativeCol + 2;
+        int index = (relativeRow > relativeCol) ? (8 - position) : position;
         return neighbours.get(index);
     }
 
@@ -79,5 +80,10 @@ public class GameCell implements Cell {
     @Override
     public void evolve() {
         isAlive = shouldBeAliveInNextGen;
+    }
+
+    @Override
+    public void setNeighbours(List<Cell> neighbours) {
+        this.neighbours = neighbours;
     }
 }

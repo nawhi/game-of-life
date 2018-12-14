@@ -1,3 +1,5 @@
+import java.util.List;
+
 public interface Cell {
     void kill();
 
@@ -5,9 +7,11 @@ public interface Cell {
 
     boolean isAlive();
 
-    Cell getNeighbour(int row, int col);
+    Cell getNeighbour(int relativeRow, int relativeCol);
 
     void mark();
 
     void evolve();
+
+    void setNeighbours(List<Cell> neighbours);
 }
