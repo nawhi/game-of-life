@@ -42,10 +42,17 @@ public class DeadGameCellShould {
     }
 
     @Test
-    public void become_alive_if_exactly_three_live_neighbours() {
+    public void become_alive_if_three_live_neighbours() {
         range(0, 3).forEach(i -> neighbours.get(i).bringToLife());
         GameCell cell = deadCellWith(neighbours);
         assertTrue(cell.isAlive());
+    }
+
+    @Test
+    public void stay_dead_if_four_live_neighbours() {
+        range(0, 4).forEach(i -> neighbours.get(i).bringToLife());
+        GameCell cell = deadCellWith(neighbours);
+        assertFalse(cell.isAlive());
     }
 
     private static GameCell deadCellWith(List<Cell> neighbours) {
