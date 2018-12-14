@@ -7,7 +7,7 @@ import java.util.function.BiConsumer;
 
 import static java.util.Arrays.asList;
 
-public class Cells {
+public class Game {
     private final GameCell[][] cells;
     private final int numRows;
     private final int numColumns;
@@ -23,17 +23,17 @@ public class Cells {
             Pair.of(0, -1)
     );
 
-    private Cells(int numRows, int numColumns) {
+    private Game(int numRows, int numColumns) {
         this.numRows = numRows;
         this.numColumns = numColumns;
         cells = new GameCell[numRows][numColumns];
         forEachCell((row, col) -> cells[row][col] = new GameCell(false));
     }
 
-    static Cells create(int numRows, int numColumns) {
-        Cells cells = new Cells(numRows, numColumns);
-        cells.initialiseNeighbours();
-        return cells;
+    static Game create(int numRows, int numColumns) {
+        Game game = new Game(numRows, numColumns);
+        game.initialiseNeighbours();
+        return game;
     }
 
     private void initialiseNeighbours() {
@@ -59,7 +59,7 @@ public class Cells {
         return cells[row][col];
     }
 
-    Cells(Cells other) {
+    Game(Game other) {
         this.numRows = other.numRows;
         this.numColumns = other.numColumns;
         this.cells = new GameCell[numRows][numColumns];
@@ -84,7 +84,7 @@ public class Cells {
         forEachCell(this::bringToLife);
     }
 
-    Cells kill(int row, int column) {
+    Game kill(int row, int column) {
         cells[row][column].kill();
         return this;
     }
@@ -93,7 +93,7 @@ public class Cells {
         return cells[row][col];
     }
 
-    Cells bringToLife(int row, int col) {
+    Game bringToLife(int row, int col) {
         cells[row][col].bringToLife();
         return this;
     }
@@ -102,8 +102,8 @@ public class Cells {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Cells cells1 = (Cells) o;
-        return Arrays.deepEquals(cells1.cells, cells);
+        Game game1 = (Game) o;
+        return Arrays.deepEquals(game1.cells, cells);
     }
 
     @Override
