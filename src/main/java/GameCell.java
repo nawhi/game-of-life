@@ -6,14 +6,7 @@ public class GameCell implements Cell {
     private boolean isAlive;
     private List<Cell> neighbours;
 
-    private enum NextGenState {
-        LIVE,
-        DIE
-    }
-
     private boolean shouldBeAliveInNextGen = false;
-
-    private NextGenState nextGenState = NextGenState.DIE;
 
     GameCell(boolean isAlive) {
         this.isAlive = isAlive;
@@ -87,9 +80,5 @@ public class GameCell implements Cell {
     @Override
     public void evolve() {
         isAlive = shouldBeAliveInNextGen;
-    }
-
-    public void setNeighbours(List<Cell> neighbours) {
-        this.neighbours = new ArrayList<>(neighbours);
     }
 }
