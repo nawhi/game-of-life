@@ -25,9 +25,9 @@ public class GameShould {
             "1,-1",
             "0,-1"
     })
-    public void give_all_BorderCell_neighbours_to_single_cell() {
+    public void give_all_BorderCell_neighbours_to_single_cell(int row, int col) {
         Cell cell = new Game(1, 1).cellAt(0, 0);
-        Cell neighbour = cell.getNeighbour(-1, -1);
+        Cell neighbour = cell.getNeighbour(row, col);
         assertTrue(neighbour instanceof BorderCell);
     }
 
@@ -53,6 +53,7 @@ public class GameShould {
     public void link_cell_neighbours_diagonally() {
         Game game = new Game(5, 5);
         Cell cell = game.cellAt(2, 2);
+
         assertSame(game.cellAt(1, 1), cell.getNeighbour(-1, -1));
         assertSame(game.cellAt(3, 3), cell.getNeighbour(1, 1));
         assertSame(game.cellAt(3, 1), cell.getNeighbour(1, -1));
