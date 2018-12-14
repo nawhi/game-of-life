@@ -11,6 +11,8 @@ public class GameCell implements Cell {
         DIE
     }
 
+    private boolean shouldBeAliveInNextGen = false;
+
     private NextGenState nextGenState = NextGenState.DIE;
 
     GameCell(boolean isAlive) {
@@ -69,16 +71,10 @@ public class GameCell implements Cell {
     @Override
     public void mark() {
         int neighbourCount = getNumLiveNeighbours();
-        if (!isAlive) {
-            if (neighbourCount != 3)
-                nextGenState = NextGenState.DIE;
-            else
-                nextGenState = NextGenState.LIVE;
+        if (isAlive) {
+            shouldBeAliveInNextGen = (neighbourCount > 1 && neighbourCount <= 3);
         } else {
-            if (neighbourCount > 1 && neighbourCount <= 3)
-                nextGenState = NextGenState.LIVE;
-            else
-                nextGenState = NextGenState.DIE;
+            shouldBeAliveInNextGen = (neighbourCount == 3);
         }
     }
 
@@ -94,7 +90,7 @@ public class GameCell implements Cell {
 
     @Override
     public void evolve() {
-        isAlive = (nextGenState == NextGenState.LIVE);
+        isAlive = shouldBeAliveInNextGen;
     }
 
     public void setNeighbours(List<Cell> neighbours) {
