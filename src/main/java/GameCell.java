@@ -68,23 +68,28 @@ public class GameCell implements Cell {
 
     @Override
     public void mark() {
+        int neighbourCount = getNumLiveNeighbours();
+        if (!isAlive) {
+            if (neighbourCount != 3)
+                nextGenState = NextGenState.DIE;
+            else
+                nextGenState = NextGenState.LIVE;
+        } else {
+            if (neighbourCount > 1 && neighbourCount <= 3)
+                nextGenState = NextGenState.LIVE;
+            else
+                nextGenState = NextGenState.DIE;
+        }
+    }
+
+    private int getNumLiveNeighbours() {
         int count = 0;
         for (var neighbour: neighbours) {
             if (neighbour.isAlive()) {
                 ++count;
             }
         }
-        if (!isAlive) {
-            if (count != 3)
-                nextGenState = NextGenState.DIE;
-            else
-                nextGenState = NextGenState.LIVE;
-        } else {
-            if (count > 1 && count <= 3)
-                nextGenState = NextGenState.LIVE;
-            else
-                nextGenState = NextGenState.DIE;
-        }
+        return count;
     }
 
     @Override
