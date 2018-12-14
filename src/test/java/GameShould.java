@@ -27,4 +27,13 @@ public class GameShould {
         assertSame(cell2, cell1.getNeighbour(0, 1));
         assertSame(cell1, cell2.getNeighbour(0, -1));
     }
+
+    @Test
+    public void link_cell_neighbours_vertically() {
+        Game game = new Game(3, 2);
+        Cell cell1 = game.cellAt(1, 1);
+        Cell cell2 = game.cellAt(2, 1);
+        assertSame(cell2, cell1.getNeighbour(1, 0));
+        assertSame(cell1, cell2.getNeighbour(-1, 0));
+    }
 }
