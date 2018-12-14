@@ -53,6 +53,13 @@ public class GameCellShould {
     }
 
     @Test
+    public void stay_dead_if_one_live_neighbour() {
+        neighbours.get(0).bringToLife();
+        GameCell cell = deadCellWith(neighbours);
+        assertFalse(cell.isAlive());
+    }
+
+    @Test
     public void die_if_no_live_neighbours() {
         GameCell cell = liveCellWith(neighbours);
         assertFalse(cell.isAlive());
