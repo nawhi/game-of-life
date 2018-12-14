@@ -48,4 +48,15 @@ public class GameShould {
         assertSame(cell2, cell1.getNeighbour(1, 0));
         assertSame(cell1, cell2.getNeighbour(-1, 0));
     }
+
+    @Test
+    public void link_cell_neighbours_diagonally() {
+        Game game = new Game(5, 5);
+        Cell cell = game.cellAt(2, 2);
+        assertSame(game.cellAt(1, 1), cell.getNeighbour(-1, -1));
+        assertSame(game.cellAt(3, 3), cell.getNeighbour(1, 1));
+        assertSame(game.cellAt(3, 1), cell.getNeighbour(1, -1));
+        assertSame(game.cellAt(1, 3), cell.getNeighbour(-1, 1));
+
+    }
 }
