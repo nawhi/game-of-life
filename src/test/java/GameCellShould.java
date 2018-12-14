@@ -88,21 +88,6 @@ public class GameCellShould {
         assertTrue(cell.isAlive());
     }
 
-    @Test
-    public void stay_dead_if_more_than_three_live_neighbours() {
-        range(0, 6).forEach(i -> neighbours.get(i).bringToLife());
-        GameCell cell = deadCellWith(neighbours);
-        assertFalse(cell.isAlive());
-    }
-
-    @Test
-    public void stay_dead_if_less_than_three_live_neighbours() {
-        neighbours.get(0).bringToLife();
-        neighbours.get(1).bringToLife();
-        GameCell cell = deadCellWith(neighbours);
-        assertFalse(cell.isAlive());
-    }
-
     private static GameCell liveCellWith(List<Cell> neighbours) {
         GameCell cell = new GameCell(true, neighbours);
         cell.mark();
