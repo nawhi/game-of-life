@@ -74,10 +74,17 @@ public class GameCell implements Cell {
                 ++count;
             }
         }
-        if (count > 1 && count <= 3)
-            nextGenState = NextGenState.LIVE;
-        else
-            nextGenState = NextGenState.DIE;
+        if (!isAlive) {
+            if (count != 3)
+                nextGenState = NextGenState.DIE;
+            else
+                nextGenState = NextGenState.LIVE;
+        } else {
+            if (count > 1 && count <= 3)
+                nextGenState = NextGenState.LIVE;
+            else
+                nextGenState = NextGenState.DIE;
+        }
     }
 
     @Override
