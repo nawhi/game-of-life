@@ -11,7 +11,7 @@ public class GameShould {
 
     @Test
     public void initialise_cells_to_dead() {
-        Cell cell = new Game(1, 1).cellAt(0, 0);
+        Cell cell = new Game(3, 5).cellAt(2, 3);
         assertFalse(cell.isAlive());
     }
 }
