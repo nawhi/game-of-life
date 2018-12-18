@@ -1,15 +1,9 @@
 import java.util.List;
 
 public class BorderCell implements Cell {
-    @Override
-    public void kill() {
-
-    }
 
     @Override
-    public void bringToLife() {
-
-    }
+    public void setAlive() {}
 
     @Override
     public boolean isAlive() {
@@ -17,22 +11,11 @@ public class BorderCell implements Cell {
     }
 
     @Override
-    public Cell getNeighbour(int relativeRow, int relativeCol) {
+    public Cell neighbour(int relativeRow, int relativeCol) {
         return null;
     }
 
-    @Override
-    public void mark() {
-
-    }
-
-    @Override
-    public void evolve() {
-
-    }
-
-    @Override
-    public void setNeighbours(List<Cell> neighbours) {
-
-    }
+    @Override public void mark() {}
+    @Override public void evolve() {}
+    @Override public void setNeighbours(List<Cell> neighbours) {}
 }

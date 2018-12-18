@@ -36,10 +36,10 @@ public class GameCellShould {
         int row = Integer.parseInt(coordsArray[0]);
         int col = Integer.parseInt(coordsArray[1]);
 
-        neighbours.get(listIndex).bringToLife();
+        neighbours.get(listIndex).setAlive();
 
         Cell cell = new GameCell(false, neighbours);
-        Cell neighbour = cell.getNeighbour(row, col);
+        Cell neighbour = cell.neighbour(row, col);
         assertTrue(neighbour.isAlive());
     }
 }

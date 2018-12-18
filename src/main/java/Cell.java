@@ -1,13 +1,12 @@
 import java.util.List;
 
 public interface Cell {
-    void kill();
 
-    void bringToLife();
+    void setAlive();
 
     boolean isAlive();
 
-    Cell getNeighbour(int relativeRow, int relativeCol);
+    Cell neighbour(int relativeRow, int relativeCol);
 
     void mark();
 

@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,12 +21,7 @@ public class GameCell implements Cell {
     }
 
     @Override
-    public void kill() {
-        isAlive = false;
-    }
-
-    @Override
-    public void bringToLife() {
+    public void setAlive() {
         isAlive = true;
     }
 
@@ -55,7 +49,7 @@ public class GameCell implements Cell {
     }
 
     @Override
-    public Cell getNeighbour(int relativeRow, int relativeCol) {
+    public Cell neighbour(int relativeRow, int relativeCol) {
         int position = relativeRow + relativeCol + 2;
         int index = (relativeRow > relativeCol) ? (8 - position) : position;
         return neighbours.get(index);

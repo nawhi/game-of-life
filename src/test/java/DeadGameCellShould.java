@@ -28,29 +28,29 @@ public class DeadGameCellShould {
 
     @Test
     public void stay_dead_if_one_live_neighbour() {
-        neighbours.get(0).bringToLife();
+        neighbours.get(0).setAlive();
         GameCell cell = deadCellWith(neighbours);
         assertFalse(cell.isAlive());
     }
 
     @Test
     public void stay_dead_if_two_live_neighbours() {
-        neighbours.get(0).bringToLife();
-        neighbours.get(1).bringToLife();
+        neighbours.get(0).setAlive();
+        neighbours.get(1).setAlive();
         GameCell cell = deadCellWith(neighbours);
         assertFalse(cell.isAlive());
     }
 
     @Test
     public void become_alive_if_three_live_neighbours() {
-        range(0, 3).forEach(i -> neighbours.get(i).bringToLife());
+        range(0, 3).forEach(i -> neighbours.get(i).setAlive());
         GameCell cell = deadCellWith(neighbours);
         assertTrue(cell.isAlive());
     }
 
     @Test
     public void stay_dead_if_four_live_neighbours() {
-        range(0, 4).forEach(i -> neighbours.get(i).bringToLife());
+        range(0, 4).forEach(i -> neighbours.get(i).setAlive());
         GameCell cell = deadCellWith(neighbours);
         assertFalse(cell.isAlive());
     }
