@@ -3,9 +3,6 @@ import java.util.List;
 public class BorderCell implements Cell {
 
     @Override
-    public void setAlive() {}
-
-    @Override
     public boolean isAlive() {
         return false;
     }
@@ -15,6 +12,7 @@ public class BorderCell implements Cell {
         return null;
     }
 
+    @Override public void setAlive() {}
     @Override public void mark() {}
     @Override public void evolve() {}
     @Override public void setNeighbours(List<Cell> neighbours) {}
