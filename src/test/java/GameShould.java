@@ -58,6 +58,5 @@ public class GameShould {
         assertSame(game.cellAt(3, 3), cell.getNeighbour(1, 1));
         assertSame(game.cellAt(3, 1), cell.getNeighbour(1, -1));
         assertSame(game.cellAt(1, 3), cell.getNeighbour(-1, 1));
-
     }
 }
