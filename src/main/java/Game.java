@@ -2,12 +2,13 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiConsumer;
 
 import static java.util.Arrays.asList;
 
 public class Game {
 
-    private final Cell[][] cells;
+    private Cell[][] cells;
     private int numRows;
     private int numColumns;
     public static final List<Pair<Integer, Integer>> NEIGHBOUR_COORDS = asList(
@@ -24,15 +25,28 @@ public class Game {
     public Game(int numRows, int numColumns) {
         this.numRows = numRows;
         this.numColumns = numColumns;
+
+        initialiseCells();
+        connectNeighbours();
+    }
+
+    private void initialiseCells() {
         cells = new Cell[numRows][numColumns];
-        for (int i = 0; i < numRows; i++) {
-            for (int j = 0; j < numColumns; j++) {
-                this.cells[i][j] = new GameCell(false);
-            }
-        }
-        for (int i = 0; i < numRows; i++) {
-            for (int j = 0; j < numColumns; j++) {
-                cells[i][j].setNeighbours(neighboursForCell(i, j));
+        forEachCell((row, col) -> cells[row][col] = new GameCell(false));
+    }
+
+    private void connectNeighbours() {
+        forEachCell((row, col) -> {
+            List<Cell> neighbours = neighboursForCell(row, col);
+            Cell cell = cells[row][col];
+            cell.setNeighbours(neighbours);
+        });
+    }
+
+    private void forEachCell(BiConsumer<Integer, Integer> operation) {
+        for (int row = 0; row < numRows; row++) {
+            for (int col = 0; col < numColumns; col++) {
+                operation.accept(row, col);
             }
         }
     }
