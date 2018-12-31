@@ -54,9 +54,9 @@ public class Game {
     private List<Cell> neighboursForCell(int row, int col) {
         List<Cell> neighbours = new ArrayList<>();
 
-        for (var coord: NEIGHBOUR_COORDS) {
-            int neighbourRow = row + coord.getLeft();
-            int neighbourCol = col + coord.getRight();
+        for (var coordinate: NEIGHBOUR_COORDS) {
+            int neighbourRow = row + coordinate.getLeft();
+            int neighbourCol = col + coordinate.getRight();
             Cell neighbour = neighbourFor(neighbourRow, neighbourCol);
             neighbours.add(neighbour);
         }
@@ -64,10 +64,12 @@ public class Game {
     }
 
     private Cell neighbourFor(int row, int col) {
-        return coordInBounds(row, col) ? new BorderCell() : cells[row][col];
+        return coordinateInBounds(row, col)
+                ? new BorderCell()
+                : cells[row][col];
     }
 
-    private boolean coordInBounds(int row, int col) {
+    private boolean coordinateInBounds(int row, int col) {
         return row < 0 || row >= numRows
             || col < 0 || col >= numColumns;
     }
